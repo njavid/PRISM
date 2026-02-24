@@ -37,7 +37,7 @@ parser.add_argument("--ddp", action="store_true")
 parser.add_argument('--gpu_ids', type=int, nargs='+', default=[0, 1])
 parser.add_argument('--accumulation_steps', type=int, default=20)
 
-parser.add_argument('--iter_nums', type=int, default=11)
+parser.add_argument('--iter_nums', type=int, default=8)
 parser.add_argument('--num_clicks', type=int, default=50)
 parser.add_argument('--num_clicks_validation', type=int, default=10)
 parser.add_argument('--use_box', action="store_true")
