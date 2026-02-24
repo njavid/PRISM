@@ -20,7 +20,8 @@ class Trainer_basic(object):
 
         a = time.time()
         use_small = True if self.args.use_small_dataset else False
-        self.train_data, self.val_data = get_dataloader(args, split='train', use_small=use_small), get_dataloader(args, split='val', use_small=use_small)
+        self.train_data, self.val_data = get_dataloader(args, split='train', use_small=use_small),
+        get_dataloader(args, split='val', use_small=use_small)
         if self.args.use_sam3d_turbo:
             self.sam = build_model(args, checkpoint='../src/ckpt/sam_med3d_turbo.pth')
         else:
@@ -39,6 +40,8 @@ class Trainer_basic(object):
               .format(round(time.time() - a, 2), self.args.rank))
 
         for p in self.sam.image_encoder.parameters():
+            p.requires_grad = False
+        for p in self.sam.prompt_encoder.parameters():
             p.requires_grad = False
 
 
