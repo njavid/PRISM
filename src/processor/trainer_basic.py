@@ -38,6 +38,9 @@ class Trainer_basic(object):
         print('dataloaders are created, models are loaded, and others are set, spent {} for rank {}'
               .format(round(time.time() - a, 2), self.args.rank))
 
+        for p in self.sam.image_encoder.parameters():
+            p.requires_grad = False
+
 
     def run(self):
         self.scaler = amp.GradScaler()
