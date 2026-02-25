@@ -87,6 +87,9 @@ class Trainer_basic(object):
             self.scaler.step(self.optimizer)
             self.scaler.update()
 
+            del loss
+            torch.cuda.empty_cache()
+            
             print('epoch: {}/{}, iter: {}/{}'.format(epoch_num, self.args.max_epoch, idx, len(self.train_data))
                   + ": loss:" + str(round(loss_summary[-1].flatten()[0], 4))
                   + ": rank:" + str(self.args.rank))
