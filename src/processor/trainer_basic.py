@@ -100,6 +100,11 @@ class Trainer_basic(object):
         self.update_lr(epoch_num, warm_up=self.args.warm_up)
         self.logger.info("- Train metrics: " + str(np.mean(loss_summary)))
 
+        # Save losses
+        save_dir = "loss_logs"
+        os.makedirs(save_dir, exist_ok=True)
+        np.save(os.path.join(save_dir, f"epoch_{epoch_num}_loss.npy"), loss_summary)
+
     def validate_sliding_window(self, epoch_num):
         self.sam.eval()
         with torch.no_grad():
