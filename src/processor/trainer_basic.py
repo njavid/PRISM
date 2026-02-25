@@ -79,7 +79,8 @@ class Trainer_basic(object):
             with amp.autocast():
                 loss, _ = self.forward(self.sam, image, label, iter_nums=self.args.iter_nums, train=True)
 
-            loss_summary.append(loss.detach().cpu().numpy())
+            # loss_summary.append(loss.detach().cpu().numpy())
+            loss_summary.append(loss.item())
 
             self.scaler.scale(loss).backward()
             self.scaler.unscale_(self.optimizer)
@@ -88,7 +89,6 @@ class Trainer_basic(object):
             self.scaler.update()
 
             del loss
-            torch.cuda.empty_cache()
             
             print('epoch: {}/{}, iter: {}/{}'.format(epoch_num, self.args.max_epoch, idx, len(self.train_data))
                   + ": loss:" + str(round(loss_summary[-1].flatten()[0], 4))
