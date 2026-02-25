@@ -80,7 +80,8 @@ class Trainer_basic(object):
                 loss, _ = self.forward(self.sam, image, label, iter_nums=self.args.iter_nums, train=True)
 
             # loss_summary.append(loss.detach().cpu().numpy())
-            loss_summary.append(loss.item())
+            loss_value = loss.item()
+            loss_summary.append(loss_value)
 
             self.scaler.scale(loss).backward()
             self.scaler.unscale_(self.optimizer)
