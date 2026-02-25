@@ -91,11 +91,11 @@ class Trainer_basic(object):
             del loss
             
             print('epoch: {}/{}, iter: {}/{}'.format(epoch_num, self.args.max_epoch, idx, len(self.train_data))
-                  + ": loss:" + str(round(loss_summary[-1].flatten()[0], 4))
+                  + ": loss:" + round(loss_value, 4)
                   + ": rank:" + str(self.args.rank))
             self.logger.info(
                 'epoch: {}/{}, iter: {}/{}'.format(epoch_num, self.args.max_epoch, idx, len(self.train_data))
-                + ": loss:" + str(round(loss_summary[-1].flatten()[0], 4))
+                + ": loss:" + round(loss_value, 4)
                 + ": rank:" + str(self.args.rank))
         print('current lr: {}'.format(self.optimizer.param_groups[0]["lr"]))
         # If the first iteration creates NaN gradients (e.g. due to a high scaling factor and thus gradient overflow),
